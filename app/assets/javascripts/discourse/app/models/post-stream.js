@@ -388,7 +388,6 @@ export default RestModel.extend({
       // Insert the gap at the appropriate place
 
       let postIdx = currentPosts.indexOf(post);
-      const origIdx = postIdx;
 
       let headGap = gap.slice(0, this.topic.chunk_size);
       let tailGap = gap.slice(this.topic.chunk_size);
@@ -399,7 +398,10 @@ export default RestModel.extend({
             this._initUserModels(p);
             const stored = this.storePost(p);
             if (!currentPosts.includes(stored)) {
-              currentPosts.insertAt(postIdx++, stored);
+              const insertAtIndex = postIdx++;
+              this.postsWithPlaceholders.insertPost(insertAtIndex, () => {
+                currentPosts.insertAt(insertAtIndex, stored);
+              });
             }
           });
 
@@ -408,11 +410,7 @@ export default RestModel.extend({
           } else {
             delete this.get("gaps.before")[postId];
           }
-          this.postsWithPlaceholders.arrayContentDidChange(
-            origIdx,
-            0,
-            posts.length
-          );
+
           post.set("hasGap", false);
           this.gapExpanded();
         });

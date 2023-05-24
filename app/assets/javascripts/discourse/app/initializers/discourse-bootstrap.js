@@ -12,15 +12,15 @@ import Session from "discourse/models/session";
 import { setDefaultOwner } from "discourse-common/lib/get-owner";
 import { setIconList } from "discourse-common/lib/icon-library";
 import { setURLContainer } from "discourse/lib/url";
-import runloop from "@ember/runloop";
-import { DEBUG } from "@glimmer/env";
+// import runloop from "@ember/runloop";
+// import { DEBUG } from "@glimmer/env";
 
 export default {
   // The very first initializer to run
   initialize(app) {
-    if (DEBUG) {
-      runloop._backburner.ASYNC_STACKS = true;
-    }
+    // if (DEBUG) {
+    //   runloop._backburner.ASYNC_STACKS = true;
+    // }
 
     setURLContainer(app.__container__);
     setDefaultOwner(app.__container__);
