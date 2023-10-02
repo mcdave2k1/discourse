@@ -48,12 +48,14 @@
     <div class="full-width">
       <PluginOutlet @name="before-list-area" />
       <div id="list-area">
-        <PluginOutlet
-          @name="discovery-list-container-top"
-          @connectorTagName="span"
-          @outletArgs={{hash category=this.category listLoading=this.loading}}
-        />
-        {{outlet "list-container"}}
+        <PluginOutlet @name="list-area" @outletArgs={{hash category=@category}}>
+          <PluginOutlet
+            @name="discovery-list-container-top"
+            @connectorTagName="span"
+            @outletArgs={{hash category=this.category listLoading=this.loading}}
+          />
+          {{outlet "list-container"}}
+        </PluginOutlet>
       </div>
     </div>
   </div>
