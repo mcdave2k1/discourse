@@ -1,0 +1,51 @@
+<Discovery::Layout
+  @category={{this.category}}
+  @createTopicDisabled={{this.createTopicDisabled}}
+>
+  <:navigation>
+    <Discovery::Navigation
+      @category={{this.navigationArgs.category}}
+      @tag={{this.navigationArgs.tag}}
+      @additionalTags={{this.additionalTags}}
+      @filterType={{this.navigationArgs.filterType}}
+      @noSubcategories={{this.navigationArgs.noSubcategories}}
+      @canBulkSelect={{this.canBulkSelect}}
+      @bulkSelectHelper={{this.bulkSelectHelper}}
+      @createTopic={{this.createTopic}}
+      @createTopicDisabled={{this.createTopicDisabled}}
+      @canCreateTopicOnTag={{this.canCreateTopicOnTag}}
+      @toggleTagInfo={{this.toggleTagInfo}}
+      @tagNotification={{this.tagNotification}}
+    />
+  </:navigation>
+
+  <:header>
+    {{#if this.subcategoriesComponent}}
+      <this.subcategoriesComponent
+        @categories={{this.subcategoryList.categories}}
+      />
+    {{/if}}
+    {{#if this.showTagInfo}}
+      <TagInfo @tag={{this.tag}} @list={{this.model}} />
+    {{/if}}
+  </:header>
+
+  <:list>
+    {{this.setTrackingTopicList this.model}}
+    <Discovery::Topics
+      @period={{this.model.for_period}}
+      @changePeriod={{this.changePeriod}}
+      @expandAllPinned={{this.expandAllPinned}}
+      @expandAllGloballyPinned={{this.expandAllGloballyPinned}}
+      @model={{this.model}}
+      @canBulkSelect={{this.canBulkSelect}}
+      @bulkSelectHelper={{this.bulkSelectHelper}}
+      @showDismissRead={{this.showDismissRead}}
+      @showResetNew={{this.showResetNew}}
+      @category={{this.category}}
+      @tag={{this.tag}}
+      @changeSort={{this.changeSort}}
+      @changeNewListSubset={{this.changeNewListSubset}}
+    />
+  </:list>
+</Discovery::Layout>
