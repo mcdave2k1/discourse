@@ -2,7 +2,7 @@
 
 module Jobs
   class AboutStats < ::Jobs::Scheduled
-    every 30.minutes
+    every 1.minutes
 
     def execute(args)
       About.refresh_stats
