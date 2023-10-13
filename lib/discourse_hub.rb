@@ -20,7 +20,7 @@ module DiscourseHub
 
   def self.get_payload
     if SiteSetting.share_anonymized_statistics && stats_fetched_at < 7.days.ago
-      About.fetch_cached_stats.symbolize_keys
+      About.public_stats.symbolize_keys
     else
       {}
     end

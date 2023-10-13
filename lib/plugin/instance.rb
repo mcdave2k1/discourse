@@ -1132,12 +1132,12 @@ class Plugin::Instance
   # group of stats is shown on the site About page in the Site Statistics
   # table. Some stats may be needed purely for reporting purposes and thus
   # do not need to be shown in the UI to admins/users.
-  def register_stat(name, show_in_ui: false, &block)
+  def register_stat(name, show_in_ui: false, private: false, &block)
     # We do not want to register and display the same group multiple times.
     return if DiscoursePluginRegistry.stats.any? { |stat_group| stat_group[:name] == name }
 
     DiscoursePluginRegistry.register_stat(
-      { name: name, show_in_ui: show_in_ui, block: block },
+      { name: name, show_in_ui: show_in_ui, private: private, block: block },
       self,
     )
   end

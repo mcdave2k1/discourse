@@ -12,6 +12,10 @@ module StatsCacheable
       raise "Not implemented."
     end
 
+    def public_stats
+      fetch_cached_stats.select { |stat| !stat[:private] }
+    end
+
     # Could be configurable, multisite need to support it.
     def recalculate_stats_interval
       30 # minutes
