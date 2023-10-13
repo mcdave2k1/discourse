@@ -48,6 +48,7 @@ module Chat
       {
         :last_day => query.where("chat_messages.created_at > ?", 1.days.ago).count,
         "7_days" => query.where("chat_messages.created_at > ?", 7.days.ago).count,
+        "28_days" => query.where("chat_messages.created_at > ?", 28.days.ago).count,
         "30_days" => query.where("chat_messages.created_at > ?", 30.days.ago).count,
         :count => query.count,
       }
@@ -60,6 +61,7 @@ module Chat
       {
         :last_day => query.where("chat_messages.created_at > ?", 1.days.ago).count,
         "7_days" => query.where("chat_messages.created_at > ?", 7.days.ago).count,
+        "28_days" => query.where("chat_messages.created_at > ?", 28.days.ago).count,
         "30_days" => query.where("chat_messages.created_at > ?", 30.days.ago).count,
         :count => query.count,
       }
@@ -77,6 +79,7 @@ module Chat
       {
         :last_day => query.where("chat_messages.created_at > ?", 1.days.ago).count,
         "7_days" => query.where("chat_messages.created_at > ?", 7.days.ago).count,
+        "28_days" => query.where("chat_messages.created_at > ?", 28.days.ago).count,
         "30_days" => query.where("chat_messages.created_at > ?", 30.days.ago).count,
         :count => query.count,
       }
