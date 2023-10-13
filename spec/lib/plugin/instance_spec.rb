@@ -836,7 +836,7 @@ RSpec.describe Plugin::Instance do
       stats = { :last_day => 1, "7_days" => 10, "30_days" => 100, :count => 1000 }
       plugin.register_stat("some_group") { stats }
       plugin.register_stat("some_group") { stats }
-      expect(DiscoursePluginRegistry.about_stat_groups.count).to eq(1)
+      expect(DiscoursePluginRegistry.stats.count).to eq(1)
     end
   end
 

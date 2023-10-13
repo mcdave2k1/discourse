@@ -3,7 +3,7 @@
 class About
   def self.displayed_plugin_stat_groups
     DiscoursePluginRegistry
-      .about_stat_groups
+      .stats
       .select { |stat_group| stat_group[:show_in_ui] }
       .map { |stat_group| stat_group[:name] }
   end
@@ -92,7 +92,7 @@ class About
 
   def plugin_stats
     final_plugin_stats = {}
-    DiscoursePluginRegistry.about_stat_groups.each do |stat_group|
+    DiscoursePluginRegistry.stats.each do |stat_group|
       begin
         stats = stat_group[:block].call
       rescue StandardError => err

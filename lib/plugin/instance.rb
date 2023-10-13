@@ -1134,9 +1134,7 @@ class Plugin::Instance
   # do not need to be shown in the UI to admins/users.
   def register_stat(name, show_in_ui: false, &block)
     # We do not want to register and display the same group multiple times.
-    if DiscoursePluginRegistry.about_stat_groups.any? { |stat_group| stat_group[:name] == name }
-      return
-    end
+    return if DiscoursePluginRegistry.stats.any? { |stat_group| stat_group[:name] == name }
 
     DiscoursePluginRegistry.register_stat(
       { name: name, show_in_ui: show_in_ui, block: block },
