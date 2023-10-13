@@ -49,5 +49,9 @@ module Chat
         users: Chat::Message.where("created_at > ?", start_of_month).distinct.count(:user_id),
       }
     end
+
+    def self.test_stat
+      { :last_day => 42, "7_days" => 42, "30_days" => 42, :previous_30_days => 42, :count => 42 }
+    end
   end
 end
