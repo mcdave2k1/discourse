@@ -2,7 +2,7 @@
 
 class Admin::DashboardController < Admin::StaffController
   def index
-    data = AdminDashboardIndexData.public_stats
+    data = AdminDashboardIndexData.fetch_cached_stats
 
     if SiteSetting.version_checks?
       data.merge!(version_check: DiscourseUpdates.check_version.as_json)
@@ -19,7 +19,7 @@ class Admin::DashboardController < Admin::StaffController
   end
 
   def general
-    render json: AdminDashboardGeneralData.public_stats
+    render json: AdminDashboardGeneralData.fetch_cached_stats
   end
 
   def problems
@@ -36,7 +36,7 @@ class Admin::DashboardController < Admin::StaffController
     data = {
       new_features: new_features,
       has_unseen_features: DiscourseUpdates.has_unseen_features?(current_user.id),
-      release_notes_link: AdminDashboardGeneralData.public_stats["release_notes_link"],
+      release_notes_link: AdminDashboardGeneralData.fetch_cached_stats["release_notes_link"],
     }
     render json: data
   end
