@@ -485,7 +485,7 @@ after_initialize do
 
   register_stat("chat_users") { Chat::Statistics.about_users }
 
-  register_stat("test_stat") { Chat::Statistics.test_stat }
+  register_stat("test_stat", private: true) { Chat::Statistics.test_stat }
 
   # Make sure to update spec/system/hashtag_autocomplete_spec.rb when changing this.
   register_hashtag_data_source(Chat::ChannelHashtagDataSource)

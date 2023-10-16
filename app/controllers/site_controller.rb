@@ -50,6 +50,6 @@ class SiteController < ApplicationController
 
   def statistics
     return redirect_to path("/") unless SiteSetting.share_anonymized_statistics?
-    render json: About.fetch_cached_stats
+    render json: About.public_stats
   end
 end
