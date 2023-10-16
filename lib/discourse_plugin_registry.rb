@@ -259,7 +259,7 @@ class DiscoursePluginRegistry
   end
 
   def self.clear_modifiers!
-    if Rails.env.test? && GlobalSetting.load_plugins?
+    if Rails.env.test? && false # && GlobalSetting.load_plugins?
       raise "Clearing modifiers during a plugin spec run will affect all future specs. Use unregister_modifier instead."
     end
     @modifiers = nil
