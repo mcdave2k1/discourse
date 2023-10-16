@@ -15,7 +15,7 @@ module StatsCacheable
     def public_stats
       private_stat_keys =
         DiscoursePluginRegistry.stats.select { |stat| stat[:private] }.map { |stat| stat[:name] }
-      fetch_cached_stats.select { |key, _| !private_stat_keys.include?(key) }
+      fetch_cached_stats.select { |key, _| !private_stat_keys.any? { |x| key.start_with?(x) } }
     end
 
     # Could be configurable, multisite need to support it.
