@@ -13,7 +13,9 @@ module StatsCacheable
     end
 
     def public_stats
-      fetch_cached_stats.select { |stat| !stat[:private] }
+      private_stat_keys =
+        DiscoursePluginRegistry.stats.select { |stat| stat[:private] }.map { |stat| stat[:name] }
+      fetch_cached_stats.select { |key, _| !private_stat_keys.include?(key) }
     end
 
     # Could be configurable, multisite need to support it.
@@ -23,7 +25,7 @@ module StatsCacheable
 
     def fetch_cached_stats
       # The scheduled Stats job is responsible for generating and caching this.
-      stats = Discourse.redis.get(stats_cache_key)
+      stats = nil # Discourse.redis.get(stats_cache_key)
       stats = refresh_stats if !stats
       JSON.parse(stats).with_indifferent_access
     end
