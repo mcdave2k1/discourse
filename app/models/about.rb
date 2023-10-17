@@ -28,7 +28,7 @@ class About
   end
 
   def self.fetch_stats
-    About.new.stats
+    Stats.calculate_all_stats
   end
 
   def initialize(user = nil)
