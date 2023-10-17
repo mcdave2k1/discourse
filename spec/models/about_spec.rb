@@ -5,9 +5,9 @@ RSpec.describe About do
     include_examples "stats cacheable"
   end
 
-  def register_about_stat_group(name, stats_block, show_in_ui: true)
+  def register_about_stat_group(name, stats_block, show_in_ui: true, private: false)
     DiscoursePluginRegistry.register_about_stat_group(
-      { name: name, show_in_ui: show_in_ui, block: stats_block },
+      { name: name, show_in_ui: show_in_ui, private: private, block: stats_block },
       stub(enabled?: true),
     )
   end
