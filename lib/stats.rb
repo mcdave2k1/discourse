@@ -61,5 +61,5 @@ class Stats
     final_plugin_stats
   end
 
-  private_class_method :plugin_stats
+  private_class_method :core_stats, :plugin_stats
 end
