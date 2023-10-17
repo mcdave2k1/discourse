@@ -45,7 +45,8 @@ RSpec.describe AboutSerializer do
 
   describe "#stats" do
     it "serialize public stats only" do
-      json = AboutSerializer.new(About.new(user), scope: Guardian.new(user), root: nil).as_json
+      serializer = AboutSerializer.new(About.new(user), scope: Guardian.new(user), root: nil)
+      json = serializer.as_json
       expect(json[:stats]["user_count"]).to eq(1)
     end
   end
