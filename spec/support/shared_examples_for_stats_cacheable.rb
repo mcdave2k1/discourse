@@ -33,7 +33,7 @@ RSpec.shared_examples_for "stats cacheable" do
       register_stat("private_stat", Proc.new { private_stat }, private: true)
       register_stat("public_stat", Proc.new { public_stat })
 
-      expect(described_class.public_stats.with_indifferent_access).to match(
+      expect(described_class.public_stats).to match(
         hash_including(
           public_stat_last_day: 42,
           public_stat_7_days: 43,
@@ -41,8 +41,7 @@ RSpec.shared_examples_for "stats cacheable" do
           public_stat_count: 45,
         ),
       )
-
-      expect(described_class.public_stats.with_indifferent_access).not_to match(
+      expect(described_class.public_stats).not_to match(
         hash_including(
           private_stat_last_day: 1,
           private_stat_7_days: 2,
