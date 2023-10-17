@@ -42,14 +42,14 @@ RSpec.shared_examples_for "stats cacheable" do
         ),
       )
 
-      # expect(described_class.new.public_stats.with_indifferent_access).to match(
-      #   hash_including(
-      #     private_stat_last_day: 1,
-      #     private_stat_7_days: 2,
-      #     private_stat_30_days: 3,
-      #     private_stat_count: 4,
-      #   ),
-      # )
+      expect(described_class.public_stats.with_indifferent_access).not_to match(
+        hash_including(
+          private_stat_last_day: 1,
+          private_stat_7_days: 2,
+          private_stat_30_days: 3,
+          private_stat_count: 4,
+        ),
+      )
     end
   end
 end
