@@ -44,10 +44,28 @@ RSpec.describe AboutSerializer do
   end
 
   describe "#stats" do
+    let(:plugin) { Plugin::Instance.new }
+
     it "serialize public stats only" do
+      plugin.register_stat("private_stat", private: true) do
+        { :last_day => 1, "7_days" => 2, "30_days" => 3, :count => 4 }
+      end
+      plugin.register_stat("public_stat") do
+        { :last_day => 11, "7_days" => 12, "30_days" => 13, :count => 14 }
+      end
+
       serializer = AboutSerializer.new(About.new(user), scope: Guardian.new(user), root: nil)
       json = serializer.as_json
-      expect(json[:stats]["user_count"]).to eq(1)
+
+      stats = json[:stats]
+      expect(stats["public_stat_last_day"]).to be(11)
+      expect(stats["public_stat_7_days"]).to be(12)
+      expect(stats["public_stat_30_days"]).to be(13)
+      expect(stats["public_stat_count"]).to be(14)
+      expect(stats["private_stat_last_day"]).not_to be_present
+      expect(stats["private_stat_7_days"]).not_to be_present
+      expect(stats["private_stat_30_days"]).not_to be_present
+      expect(stats["private_stat_count"]).not_to be_present
     end
   end
 end
