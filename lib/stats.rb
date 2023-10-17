@@ -5,6 +5,12 @@ class Stats
     core_stats.merge(plugin_stats)
   end
 
+  def self.exposable
+    private_stat_keys =
+      DiscoursePluginRegistry.stats.select { |stat| stat[:private] }.map { |stat| stat[:name] }
+    all.select { |key, _| !private_stat_keys.any? { |x| key.start_with?(x) } }
+  end
+
   private
 
   def self.core_stats

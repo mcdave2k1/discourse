@@ -28,7 +28,7 @@ class About
   end
 
   def self.fetch_stats
-    Stats.all
+    Stats.exposable
   end
 
   def initialize(user = nil)
@@ -64,7 +64,7 @@ class About
   end
 
   def stats
-    @stats ||= Stats.all
+    @stats ||= Stats.exposable
   end
 
   def category_moderators
