@@ -2,6 +2,12 @@
 
 class Stats
   def self.calculate_all_stats
+    core_stats.merge(plugin_stats)
+  end
+
+  private
+
+  def self.core_stats
     {
       topic_count: Topic.listable_topics.count,
       topics_last_day: Topic.listable_topics.where("created_at > ?", 1.days.ago).count,
@@ -25,10 +31,8 @@ class Stats
         UserAction.where(action_type: UserAction::LIKE).where("created_at > ?", 7.days.ago).count,
       likes_30_days:
         UserAction.where(action_type: UserAction::LIKE).where("created_at > ?", 30.days.ago).count,
-    }.merge(plugin_stats)
+    }
   end
-
-  private
 
   def self.plugin_stats
     final_plugin_stats = {}
