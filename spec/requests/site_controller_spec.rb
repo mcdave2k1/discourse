@@ -78,15 +78,14 @@ RSpec.describe SiteController do
       get "/site/statistics.json"
       json = response.parsed_body
 
-      stats = json[:stats]
-      expect(stats["public_stat_last_day"]).to be(11)
-      expect(stats["public_stat_7_days"]).to be(12)
-      expect(stats["public_stat_30_days"]).to be(13)
-      expect(stats["public_stat_count"]).to be(14)
-      expect(stats["private_stat_last_day"]).not_to be_present
-      expect(stats["private_stat_7_days"]).not_to be_present
-      expect(stats["private_stat_30_days"]).not_to be_present
-      expect(stats["private_stat_count"]).not_to be_present
+      expect(json["public_stat_last_day"]).to be(11)
+      expect(json["public_stat_7_days"]).to be(12)
+      expect(json["public_stat_30_days"]).to be(13)
+      expect(json["public_stat_count"]).to be(14)
+      expect(json["private_stat_last_day"]).not_to be_present
+      expect(json["private_stat_7_days"]).not_to be_present
+      expect(json["private_stat_30_days"]).not_to be_present
+      expect(json["private_stat_count"]).not_to be_present
     end
   end
 end
