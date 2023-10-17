@@ -42,4 +42,11 @@ RSpec.describe AboutSerializer do
       expect(json[:contact_email]).to eq(SiteSetting.contact_email)
     end
   end
+
+  describe "#stats" do
+    it "serialize public stats only" do
+      json = AboutSerializer.new(About.new(user), scope: Guardian.new(user), root: nil).as_json
+      expect(json[:stats]["user_count"]).to eq(1)
+    end
+  end
 end
