@@ -28,7 +28,7 @@ class About
   end
 
   def self.fetch_stats
-    Stats.calculate_all_stats
+    Stats.all
   end
 
   def initialize(user = nil)
@@ -64,7 +64,7 @@ class About
   end
 
   def stats
-    @stats ||= Stats.calculate_all_stats
+    @stats ||= Stats.all
   end
 
   def category_moderators

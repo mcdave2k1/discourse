@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Stats
-  def self.calculate_all_stats
+  def self.all
     core_stats.merge(plugin_stats)
   end
 
