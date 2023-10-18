@@ -62,22 +62,15 @@ RSpec.describe About do
       register_stat("private_stat", Proc.new { private_stat }, private: true)
       register_stat("public_stat", Proc.new { public_stat })
 
-      expect(described_class.new.stats).to match(
-        hash_including(
-          public_stat_last_day: 42,
-          public_stat_7_days: 43,
-          public_stat_30_days: 44,
-          public_stat_count: 45,
-        ),
-      )
-      expect(described_class.new.stats).not_to match(
-        hash_including(
-          private_stat_last_day: 1,
-          private_stat_7_days: 2,
-          private_stat_30_days: 3,
-          private_stat_count: 4,
-        ),
-      )
+      stats = described_class.new.stats
+      expect(stats[:public_stat_last_day]).to be(42)
+      expect(stats[:public_stat_7_days]).to be(43)
+      expect(stats[:public_stat_30_days]).to be(44)
+      expect(stats[:public_stat_count]).to be(45)
+      expect(stats[:private_stat_last_day]).not_to be_present
+      expect(stats[:private_stat_7_days]).not_to be_present
+      expect(stats[:private_stat_30_days]).not_to be_present
+      expect(stats[:private_stat_count]).not_to be_present
     end
   end
 
