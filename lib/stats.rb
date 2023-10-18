@@ -43,29 +43,44 @@ class Stats
   def self.plugin_stats
     final_plugin_stats = {}
     DiscoursePluginRegistry.stats.each do |stat_group|
-      begin
-        stats = stat_group[:block].call
-      rescue StandardError => err
-        Discourse.warn_exception(
-          err,
-          message: "Unexpected error when collecting #{stat_group[:name]} About stats.",
-        )
-        next
-      end
-
-      if !stats.key?(:last_day) || !stats.key?("7_days") || !stats.key?("30_days") ||
-           !stats.key?(:count)
-        Rails.logger.warn(
-          "Plugin stat group #{stat_group[:name]} for About stats does not have all required keys, skipping.",
-        )
-      else
-        final_plugin_stats.merge!(
-          stats.transform_keys { |key| "#{stat_group[:name]}_#{key}".to_sym },
-        )
-      end
+      stat = Stat.new(stat_group)
+      final_plugin_stats.merge!(stat.values)
     end
     final_plugin_stats
   end
 
   private_class_method :core_stats, :plugin_stats
+end
+
+class Stat
+  def initialize(hash)
+    @name = hash[:name]
+    @show_in_ui = hash[:show_in_ui]
+    @private = hash[:private]
+    @block = hash[:block]
+  end
+
+  def values
+    result = {}
+
+    begin
+      stats = @block.call
+
+      if !stats.key?(:last_day) || !stats.key?("7_days") || !stats.key?("30_days") ||
+           !stats.key?(:count)
+        Rails.logger.warn(
+          "Plugin stat group #{@name} for About stats does not have all required keys, skipping.",
+        )
+      else
+        result.merge!(stats.transform_keys { |key| "#{@name}_#{key}".to_sym })
+      end
+    rescue StandardError => err
+      puts "ERROR ERROR"
+      Discourse.warn_exception(
+        err,
+        message: "Unexpected error when collecting #{@name} About stats.",
+      )
+    end
+    result
+  end
 end
