@@ -816,7 +816,7 @@ RSpec.describe Plugin::Instance do
     it "registers an about stat group correctly" do
       stats = { :last_day => 1, "7_days" => 10, "30_days" => 100, :count => 1000 }
       plugin.register_stat("some_group", show_in_ui: true) { stats }
-      expect(About.new.plugin_stats.with_indifferent_access).to match(
+      expect(Stats.all.with_indifferent_access).to match(
         hash_including(
           some_group_last_day: 1,
           some_group_7_days: 10,
