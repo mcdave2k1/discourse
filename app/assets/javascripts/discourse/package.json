@@ -22,7 +22,7 @@
     "ember-route-template": "^1.0.1",
     "ember-source": "~3.28.12",
     "handlebars": "^4.7.8",
-    "pretty-text": "1.0.0"
+    "pretty-text": "1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
