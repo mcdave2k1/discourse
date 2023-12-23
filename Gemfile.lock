@@ -9,9 +9,9 @@ GIT
 
 GIT
   remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: c17bac468c5c5e4ca6808f7232abaca090f71e26
+  revision: 3e9d69ba7b6cc37251deb08f1a8866c97cf2bc0c
   specs:
-    shoulda-matchers (5.3.0)
+    shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
 
 GEM
@@ -453,13 +453,13 @@ GEM
     sass-embedded (1.69.3)
       google-protobuf (~> 3.23)
       rake (>= 13.0.0)
-    sass-embedded (1.69.3-aarch64-linux-gnu)
+    sass-embedded (1.69.3-aarch64-linux)
       google-protobuf (~> 3.23)
     sass-embedded (1.69.3-arm64-darwin)
       google-protobuf (~> 3.23)
     sass-embedded (1.69.3-x86_64-darwin)
       google-protobuf (~> 3.23)
-    sass-embedded (1.69.3-x86_64-linux-gnu)
+    sass-embedded (1.69.3-x86_64-linux)
       google-protobuf (~> 3.23)
     selenium-webdriver (4.14.0)
       rexml (~> 3.2, >= 3.2.5)
