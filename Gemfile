@@ -59,7 +59,7 @@ gem "redis-namespace"
 # we used an old branch which is the fastest one out there
 # are long term goal here is to fork this gem so we have a
 # better maintained living fork
-gem "active_model_serializers", "~> 0.8.3"
+gem "active_model_serializers", "~> 0.9.0"
 
 gem "http_accept_language", require: false
 
@@ -137,11 +137,11 @@ end
 
 group :test do
   gem "capybara", require: false
-  gem "webmock", require: false
+  gem "webmock", ">= 3.20.0", require: false
   gem "fakeweb", require: false
   gem "minitest", require: false
   gem "simplecov", require: false
-  gem "selenium-webdriver", "~> 4.11", require: false
+  gem "selenium-webdriver", "~> 4.15", ">= 4.15.0", require: false
   gem "test-prof"
   gem "rails-dom-testing", require: false
   gem "minio_runner", require: false
@@ -156,12 +156,12 @@ group :test, :development do
 
   gem "rb-fsevent", require: RUBY_PLATFORM =~ /darwin/i ? "rb-fsevent" : false
 
-  gem "rspec-rails"
+  gem "rspec-rails", ">= 6.0.4"
 
   gem "shoulda-matchers", require: false, github: "thoughtbot/shoulda-matchers"
   gem "rspec-html-matchers"
   gem "byebug", require: ENV["RM_INFO"].nil?, platform: :mri
-  gem "rubocop-discourse", require: false
+  gem "rubocop-discourse", ">= 3.4.1", require: false
   gem "parallel_tests"
 
   gem "rswag-specs"
